@@ -1,4 +1,4 @@
-# medots - multiplatform config files manager
+# medots - Cross-platform config files manager
 
 ## Motivation
 
