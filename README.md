@@ -1,4 +1,5 @@
-# medots - Cross-platform config files manager
+# medots: Cross-platform config files manager
+[![Build](https://github.com/aminehmida/medots/actions/workflows/release.yaml/badge.svg)](https://github.com/aminehmida/medots/actions/workflows/release.yaml)
 
 ## Motivation
 
