@@ -20,7 +20,7 @@ The best way to discover medots features is by building a real world `dots.yaml`
 ```yaml
 nvim:
   - source: ./nvim/init.vim
-  - destination: ~/.config/nvim/
+    destination: ~/.config/nvim/
 ```
 
 We start by defining the name of the app that we want to manage its config files. This is can be used to target that specific app if you don't want to deploy all your configs.
