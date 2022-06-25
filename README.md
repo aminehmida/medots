@@ -3,7 +3,7 @@
 
 ## Motivation
 
-I want to be able to manage my config files (dot files) stored in a git repo across multiple OSs. The actual config files should be created as symlinks to the original files in the git repository.
+I use Linux, MacOS and WSL and I switch between them often. I was looking for a tool that can deploy my dot files in different environments quickly and easily. Not only symlinking those configs, I wanted to symlink OS specific files automatically and run commands before and/or after symlinking those file. I couldn't find such tool, so I created *medots*.
 
 ## How does it works
 
@@ -12,6 +12,8 @@ medots uses `dots.yaml` file saved in the same git repo as your dot files to und
 You will usually have to run `medots deploy` in the repo where the `dots.yaml` file is saved.
 
 The best way to discover medots features is by building a real world `dots.yaml` config file.
+
+After installing the tool, check the [Features by example](#features-by-example) section to see how to use the `dots.yaml` file.
 
 ## Install
 
@@ -24,11 +26,11 @@ brew install medots
 
 ### DEB package
 
-Download the latest `.deb` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest]
+Download the latest `.deb` file for your architecture from the [release page](https://github.com/aminehmida/medots/releases/latest)
 
 ### RPM package
 
-Download the latest `.rpm` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest]
+Download the latest `.rpm` file for your architecture from the [release page](https://github.com/aminehmida/medots/releases/latest)
 
 ### From AUR for Arch Linux
 
@@ -38,9 +40,8 @@ yay -S medots
 
 ### APK package for Alpine Linux
 
-Download the latest `.apk` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest]
-
-The package is not signed. You can still verify the package comparing its sha256 against values in `checksums_sha256.txt` file. After that you can use `--allow-insecure` flag:
+Download the latest `.apk` file for your architecture from the [release page](https://github.com/aminehmida/medots/releases/latest).
+The package is not signed. You can still verify the package by comparing its sha256 against values in `checksums_sha256.txt` file. After that you can use `--allow-insecure` flag:
 
 ```shell
 sha256sum --check --ignore-missing checksums_sha256.txt
@@ -49,7 +50,7 @@ apk add --allow-insecure ./$apk_filename
 
 ### Binary archive
 
-Download the latest `.tar.gz` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest] and extract it in your `$PATH`.
+Download the latest `.tar.gz` file for your architecture from the [release page](https://github.com/aminehmida/medots/releases/latest) and extract it in your `$PATH`.
 
 ### From source
 
@@ -71,7 +72,9 @@ nvim:
 
 We start by defining the name of the app that we want to manage its config files. This is can be used to target that specific app if you don't want to deploy all your configs.
 
-We can now run `medots deploy nvim`. The following sequence of actions will happen:
+We can now run `medots deploy` to deploy all apps or `medots deploy nvim` to target nvim only.
+
+The following sequence of actions will happen:
 
 1. `~/.config/nvim/` directory will be recursively created if it doesn't exist
 2. `~/.config/nvim/init.vim` will be renamed to `~/.config/nvim/init.vim.bak` if it already exists
@@ -95,7 +98,7 @@ nvim:
     destination: ~/.config/nvim/
 ```
 
-Or by add multiple entries for you app:
+Or by adding multiple entries for your app:
 
 ```yaml
 nvim:
@@ -107,7 +110,7 @@ nvim:
 
 ### Targeting a specific OS
 
-You can target a specific OS by adding `if_os`. The supported values are: `linux`, `darwin`, `windows`. Using me dots in Windows is not tested. Feel free  to report any issues.
+You can target a specific OS by adding `if_os`. The supported values are: `linux`, `darwin`, `windows`. Using medots in Windows is not tested. However, I have tested it in WSL. Feel free to report any issues related to Windows.
 
 ```yaml
 nvim:
@@ -127,7 +130,7 @@ Sometimes, a command need to be executed before or after the config file is syml
 nvim:
   # Install vim-plug
   - run: curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  # This will copy the config files then install the plugins
+  # This will symlink the config files then install the plugins
   - source: ./nvim/*
     destination: ~/.config/nvim/
     run_interactive: nvim +PlugInstall
@@ -174,6 +177,6 @@ zsh:
 
 ## Contact, bugs and feature requests
 
-I am using `medots` for my personal needs and it's serving me well because I couldn't find any cross platform config file manager. If you find the project useful, please give it a Star ⭐️ that will make me happy and motivated to work more on it 🤗 also feel free to share it with anyone who could find it useful 😉
+I am using `medots` for my personal needs and it's serving me very well. I published this project because I couldn't find any other cross-platform config manager. If you find the it useful, please give it a Star ⭐️ that will make me happy and motivated to work more on it 🤗 also feel free to share it with anyone who could find it useful 😉
 
-If you find a bug or you have a feature request, please open a github issue
+If you find a bug or you have a feature request, please open a github issue.
