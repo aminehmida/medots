@@ -7,11 +7,57 @@ I want to be able to manage my config files (dot files) stored in a git repo acr
 
 ## How does it works
 
-me dots uses `dots.yaml` file saved in the same git repo as your dot files to understand how to "deploy" them correctly.
+medots uses `dots.yaml` file saved in the same git repo as your dot files to understand how to "deploy" them correctly.
 
 You will usually have to run `medots deploy` in the repo where the `dots.yaml` file is saved.
 
 The best way to discover medots features is by building a real world `dots.yaml` config file.
+
+## Install
+
+### Using Homebrew
+
+```shell
+brew cask aminehmida/medots
+brew install medots
+```
+
+### DEB package
+
+Download the latest `.deb` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest]
+
+### RPM package
+
+Download the latest `.rpm` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest]
+
+### From AUR for Arch Linux
+
+```shell
+yay -S medots
+```
+
+### APK package for Alpine Linux
+
+Download the latest `.apk` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest]
+
+The package is not signed. You can still verify the package comparing its sha256 against values in `checksums_sha256.txt` file. After that you can use `--allow-insecure` flag:
+
+```shell
+sha256sum --check --ignore-missing checksums_sha256.txt
+apk add --allow-insecure ./$apk_filename
+```
+
+### Binary archive
+
+Download the latest `.tar.gz` file for your architecture from the (release page)[https://github.com/aminehmida/medots/releases/latest] and extract it in your `$PATH`.
+
+### From source
+
+Make sure you have Go installed first.
+
+```shell
+go install github.com/aminehmida/medots
+```
 
 ## Features by example
 
