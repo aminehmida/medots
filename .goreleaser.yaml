@@ -13,13 +13,13 @@ builds:
       - linux
       - windows
       - darwin
-# archives:
-#   - replacements:
-#       darwin: Darwin
-#       linux: Linux
-#       windows: Windows
-#       386: i386
-#       amd64: x86_64
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
 nfpms:
   - homepage: https://github.com/aminehmida/medots
     maintainer: Amine Hmida <aminehmida@gmail.com>
@@ -28,8 +28,14 @@ nfpms:
       - apk
       - deb
       - rpm
+brews:
+- name: medots
+  homepage: https://github.com/aminehmida/medots
+  tap:
+    owner: aminehmida
+    name: homebrew-medots
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'checksums_sha256.txt'
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
