@@ -29,11 +29,23 @@ nfpms:
       - deb
       - rpm
 brews:
-- name: medots
-  homepage: https://github.com/aminehmida/medots
-  tap:
-    owner: aminehmida
-    name: homebrew-medots
+  - name: medots
+    homepage: https://github.com/aminehmida/medots
+    tap:
+      owner: aminehmida
+      name: homebrew-medots
+aurs:
+  - homepage: https://github.com/aminehmida/medots
+    description: "Cross-platform dot config files manager using a yaml file."
+    maintainers:
+      - 'Amine Hmida <amine hmida at gmail dot com>'
+    license: GPL-3.0
+    git_url: 'ssh://aur@aur.archlinux.org/medots-bin.git'
+    commit_author:
+      name: Amine Hmida
+      email: aminehmida@gmail.com
+    private_key: '{{ .Env.AUR_KEY }}'
+    skip_upload: false
 checksum:
   name_template: 'checksums_sha256.txt'
 snapshot:
