@@ -1,5 +1,5 @@
 # medots: Cross-platform config files manager
-[![Build](https://github.com/aminehmida/medots/actions/workflows/build.yaml/badge.svg)](https://github.com/aminehmida/medots/actions/workflows/build.yaml)
+[![Build](https://github.com/aminehmida/medots/actions/workflows/build.yaml/badge.svg)](https://github.com/aminehmida/medots/actions/workflows/build.yaml) [![Go Report Card](https://goreportcard.com/badge/github.com/aminehmida/medots)](https://goreportcard.com/report/github.com/aminehmida/medots)
 
 ## Motivation
 
