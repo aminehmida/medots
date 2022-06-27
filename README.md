@@ -136,11 +136,26 @@ nvim:
     run_interactive: nvim +PlugInstall
   # This command will be executed last
   - run_interactive: nvim +UpdateRemotePlugins
+
+# You don't need to have a source and destination in your app block.
+# This allows running any arbitrary command:
+packages:
+  - run_interactive: yay -S neovim tmux wget curl ripgrep jq fzf bat exa fd git-delta github-cli sops age awscli kubectl asdf-vm python-poetry
+    if_os: linux
+  - run_interactive: brew install neovim tmux wget curl ripgrep jq fzf bat exa fd git-delta gh sops age awscli kubectl asdf poetry
+    if_os: darwin
 ```
 
 ### Full `dots.yaml` example
 
 ```yaml
+# Install os specific packages
+packages:
+  - run_interactive: yay -S neovim tmux wget curl ripgrep jq fzf bat exa fd git-delta github-cli sops age awscli kubectl asdf-vm python-poetry
+    if_os: linux
+  - run_interactive: brew install neovim tmux wget curl ripgrep jq fzf bat exa fd git-delta gh sops age awscli kubectl asdf poetry
+    if_os: darwin
+
 nvim:
   # Install vim-plug
   - run: curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
