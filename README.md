@@ -20,7 +20,7 @@ After installing the tool, check the [Features by example](#features-by-example)
 ### Using Homebrew
 
 ```shell
-brew cask aminehmida/medots
+brew tap aminehmida/medots
 brew install medots
 ```
 
