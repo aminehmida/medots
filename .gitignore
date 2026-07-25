@@ -19,5 +19,7 @@
 
 # Go workspace file
 go.work
-main
+
+# Compiled binary
+/medots
 dist/

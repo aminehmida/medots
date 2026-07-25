@@ -2,7 +2,6 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -13,11 +12,11 @@ import (
 )
 
 type AppConfig struct {
-	Source         string `yaml:"source" omitempty`
-	Destination    string `yaml:"destination" omitempty`
-	Run            string `yaml:"run" omitempty`
-	RunInteractive string `yaml:"run_interactive" omitempty`
-	IfOS           string `yaml:"if_os" omitempty`
+	Source         string `yaml:"source,omitempty"`
+	Destination    string `yaml:"destination,omitempty"`
+	Run            string `yaml:"run,omitempty"`
+	RunInteractive string `yaml:"run_interactive,omitempty"`
+	IfOS           string `yaml:"if_os,omitempty"`
 }
 
 // TODO: make this a config flag
@@ -25,7 +24,7 @@ const ShellToUse = "/bin/sh"
 
 func ReadConfig(configPath string) (*map[string][]AppConfig, error) {
 	config := make(map[string][]AppConfig)
-	configFile, err := ioutil.ReadFile(configPath)
+	configFile, err := os.ReadFile(configPath)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +44,9 @@ func symlinkWithBackup(src, dst string) error {
 		}
 		if fileInfo.Mode().IsRegular() {
 			fmt.Println("Backing up " + dst)
-			os.Rename(dst, dst+".bak")
+			if err := os.Rename(dst, dst+".bak"); err != nil {
+				return err
+			}
 		}
 	}
 	// Create the symlink
@@ -80,7 +81,7 @@ func (obj AppConfig) Link() (*string, *string, error) {
 
 			//Error if no files found
 			if len(files) == 0 {
-				return nil, nil, fmt.Errorf("No files found for %s", obj.Source)
+				return nil, nil, fmt.Errorf("no files found for %s", obj.Source)
 			}
 			// Error if multiple source files and destination is not a directory
 			if len(files) > 1 && !destIsDir {
@@ -90,21 +91,27 @@ func (obj AppConfig) Link() (*string, *string, error) {
 			// Create the destination directory if it doesn't exist
 			if _, err := os.Stat(dest); os.IsNotExist(err) {
 				fmt.Println("Creating directory: " + dest)
-				os.MkdirAll(dest, 0750)
+				if err := os.MkdirAll(dest, 0750); err != nil {
+					return nil, nil, err
+				}
 			}
 
 			if destIsDir {
 				for _, file := range files {
 					destFile := filepath.Join(dest, filepath.Base(file))
 					fmt.Println("Linking " + file + " to " + destFile)
-					symlinkWithBackup(file, destFile)
+					if err := symlinkWithBackup(file, destFile); err != nil {
+						return nil, nil, err
+					}
 				}
 			} else {
 				dest, err := homedir.Expand(obj.Destination)
 				if err != nil {
 					return nil, nil, err
 				}
-				symlinkWithBackup(files[0], dest)
+				if err := symlinkWithBackup(files[0], dest); err != nil {
+					return nil, nil, err
+				}
 			}
 		}
 		if obj.Run != "" {

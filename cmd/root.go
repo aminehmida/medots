@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
+Copyright © 2022 Amine Hmida <aminehmida@gmail.com>
 */
 package cmd
 
@@ -13,16 +12,12 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "medots",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "Cross-platform dot config files manager using a yaml file",
+	Long: `medots is a cross-platform config files manager.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+It uses a dots.yaml file to symlink your dot files (including OS-specific
+ones) and run commands before and/or after symlinking, so you can deploy
+your configuration quickly and consistently across Linux, macOS and WSL.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

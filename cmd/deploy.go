@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
+Copyright © 2022 Amine Hmida <aminehmida@gmail.com>
 */
 package cmd
 
@@ -18,9 +17,7 @@ var deployCmd = &cobra.Command{
 	Short: "Deploy a configuration for all or a specific application",
 	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("deploy called")
 		configPath := cmd.Flag("config").Value.String()
-		println(configPath)
 		conf, err := config.ReadConfig(configPath)
 		if err != nil {
 			fmt.Println(err)
@@ -28,40 +25,37 @@ var deployCmd = &cobra.Command{
 		}
 		if len(args) == 0 {
 			fmt.Println("No application name specified. Deploying all applications.")
-			for k, e := range *conf {
-				fmt.Println("Deploying config for: " + k)
-				for _, v := range e {
-					stdout, stderr, err := v.Link()
-					if err != nil {
-						fmt.Println(err)
-					}
-					if stdout != nil {
-						color.Green("stdout: \n" + *stdout)
-					}
-					if stderr != nil {
-						color.Red("stderr: \n" + *stderr)
-					}
-				}
+			for app, entries := range *conf {
+				deployApp(app, entries)
 			}
 		} else {
 			for _, arg := range args {
-				//TODO: check if arg is in config
-				fmt.Println("Deploying config for: " + arg)
-				for _, v := range (*conf)[arg] {
-					stdout, stderr, err := v.Link()
-					if err != nil {
-						fmt.Println(err)
-					}
-					if stdout != nil {
-						color.Green("stdout: \n" + *stdout)
-					}
-					if stderr != nil {
-						color.Red("stderr: \n" + *stderr)
-					}
+				entries, ok := (*conf)[arg]
+				if !ok {
+					color.Red("No configuration found for: " + arg)
+					continue
 				}
+				deployApp(arg, entries)
 			}
 		}
 	},
+}
+
+// deployApp deploys all config entries for a single application.
+func deployApp(app string, entries []config.AppConfig) {
+	fmt.Println("Deploying config for: " + app)
+	for _, entry := range entries {
+		stdout, stderr, err := entry.Link()
+		if err != nil {
+			color.Red(err.Error())
+		}
+		if stdout != nil {
+			color.Green("stdout: \n" + *stdout)
+		}
+		if stderr != nil {
+			color.Red("stderr: \n" + *stderr)
+		}
+	}
 }
 
 func init() {

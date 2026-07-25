@@ -180,7 +180,7 @@ zsh:
   # Install ohmyzsh
   - run_interactive: 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
     if_os: darwin
-  - run_nteractive: yay -S oh-my-zsh-git
+  - run_interactive: yay -S oh-my-zsh-git
     if_os: linux
   # Install zsh-histdb
   - run: mkdir -p $HOME/.oh-my-zsh/custom/plugins/; git clone https://github.com/larkery/zsh-histdb $HOME/.oh-my-zsh/custom/plugins/zsh-histdb
