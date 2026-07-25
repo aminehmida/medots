@@ -1,5 +1,9 @@
+<p align="center">
+  <img src="assets/logo.svg" alt="medots logo" width="128" height="128">
+</p>
+
 # medots: Cross-platform config files manager
-[![Build](https://github.com/aminehmida/medots/actions/workflows/build.yaml/badge.svg)](https://github.com/aminehmida/medots/actions/workflows/build.yaml) [![Go Report Card](https://goreportcard.com/badge/github.com/aminehmida/medots)](https://goreportcard.com/report/github.com/aminehmida/medots)
+[![Release](https://img.shields.io/github/v/release/aminehmida/medots)](https://github.com/aminehmida/medots/releases/latest) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 ## Motivation
 

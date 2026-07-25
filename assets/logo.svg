@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <g id="bg">
+    <rect x="16" y="16" width="480" height="480" rx="112" fill="#0F172A"/>
+  </g>
+  <g id="icon">
+    <!-- Left vertical stroke -->
+    <circle cx="150" cy="150" r="16" fill="#2DD4BF"/>
+    <circle cx="150" cy="192" r="16" fill="#6366F1"/>
+    <circle cx="150" cy="234" r="16" fill="#6366F1"/>
+    <circle cx="150" cy="276" r="16" fill="#6366F1"/>
+    <circle cx="150" cy="318" r="16" fill="#6366F1"/>
+    <circle cx="150" cy="360" r="16" fill="#6366F1"/>
+    <!-- Right vertical stroke -->
+    <circle cx="362" cy="150" r="16" fill="#2DD4BF"/>
+    <circle cx="362" cy="192" r="16" fill="#6366F1"/>
+    <circle cx="362" cy="234" r="16" fill="#6366F1"/>
+    <circle cx="362" cy="276" r="16" fill="#6366F1"/>
+    <circle cx="362" cy="318" r="16" fill="#6366F1"/>
+    <circle cx="362" cy="360" r="16" fill="#6366F1"/>
+    <!-- Left diagonal -->
+    <circle cx="185" cy="192" r="15" fill="#6366F1"/>
+    <circle cx="220" cy="234" r="15" fill="#6366F1"/>
+    <!-- Right diagonal -->
+    <circle cx="327" cy="192" r="15" fill="#6366F1"/>
+    <circle cx="292" cy="234" r="15" fill="#6366F1"/>
+    <!-- Center vertex of the M -->
+    <circle cx="256" cy="276" r="17" fill="#2DD4BF"/>
+  </g>
+</svg>
