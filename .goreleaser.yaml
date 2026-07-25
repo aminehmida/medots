@@ -1,11 +1,9 @@
-# This is an example .goreleaser.yml file with some sensible defaults.
+version: 2
+
 # Make sure to check the documentation at https://goreleaser.com
 before:
   hooks:
-    # You may remove this if you don't use go modules.
     - go mod tidy
-    # you may remove this if you don't need go generate
-    - go generate ./...
 builds:
   - env:
       - CGO_ENABLED=0
@@ -14,12 +12,12 @@ builds:
       - windows
       - darwin
 archives:
-  - replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: i386
-      amd64: x86_64
+  - name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
 nfpms:
   - homepage: https://github.com/aminehmida/medots
     maintainer: Amine Hmida <aminehmida@gmail.com>
@@ -31,7 +29,7 @@ nfpms:
 brews:
   - name: medots
     homepage: https://github.com/aminehmida/medots
-    tap:
+    repository:
       owner: aminehmida
       name: homebrew-medots
 aurs:
@@ -49,7 +47,7 @@ aurs:
 checksum:
   name_template: 'checksums_sha256.txt'
 snapshot:
-  name_template: "{{ incpatch .Version }}-next"
+  version_template: "{{ incpatch .Version }}-next"
 changelog:
   sort: asc
   filters:
