@@ -17,10 +17,8 @@ type AppConfig struct {
 	Run            string `yaml:"run,omitempty"`
 	RunInteractive string `yaml:"run_interactive,omitempty"`
 	IfOS           string `yaml:"if_os,omitempty"`
+	ShellToUse     string `yaml:"shell,omitempty"`
 }
-
-// TODO: make this a config flag
-const ShellToUse = "/bin/sh"
 
 func ReadConfig(configPath string) (*map[string][]AppConfig, error) {
 	config := make(map[string][]AppConfig)
@@ -114,9 +112,21 @@ func (obj AppConfig) Link() (*string, *string, error) {
 				}
 			}
 		}
+		shellToUse := ""
+		if obj.ShellToUse != "" {
+			shellToUse = obj.ShellToUse
+		}
+
+		if shellToUse == "" {
+			shellToUse = os.Getenv("SHELL")
+
+			if shellToUse == "" {
+				shellToUse = "/bin/sh"
+			}
+		}
 		if obj.Run != "" {
 			fmt.Println("Running: " + obj.Run)
-			stdout, stderr, err := shell.Run(obj.Run, ShellToUse, false)
+			stdout, stderr, err := shell.Run(obj.Run, shellToUse, false)
 			if err != nil {
 				return nil, nil, err
 			}
@@ -124,7 +134,7 @@ func (obj AppConfig) Link() (*string, *string, error) {
 		}
 		if obj.RunInteractive != "" {
 			fmt.Println("Running: " + obj.RunInteractive)
-			stdout, stderr, err := shell.Run(obj.RunInteractive, ShellToUse, true)
+			stdout, stderr, err := shell.Run(obj.RunInteractive, shellToUse, true)
 			if err != nil {
 				return nil, nil, err
 			}

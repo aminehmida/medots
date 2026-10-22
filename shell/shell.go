@@ -11,6 +11,7 @@ func Run(command string, shellToUse string, interactive bool) (string, string, e
 		cmd := exec.Command(shellToUse, "-c", command)
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
 		err := cmd.Run()
 		return "", "", err
 	} else {
